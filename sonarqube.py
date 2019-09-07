@@ -4,6 +4,7 @@
 import requests
 import logging
 import time
+
 logging.basicConfig(filename='sonarqube.trace', level=logging.INFO)
 
 
@@ -43,8 +44,8 @@ class Sonarqube:
                 return True
             else:
                 return False
-        except BaseException as be:
-            print(be.message)
+        except ConnectionError as ce:
+            logging.error("Login Sonarqube service catch exceptions: " + str(ce))
         return False
 
     def logout(self):
@@ -66,8 +67,8 @@ class Sonarqube:
                 return True
             else:
                 return False
-        except BaseException as be:
-            print(be.message)
+        except ConnectionError as ce:
+            logging.error("Login Sonarqube service catch exceptions: " + str(ce))
         return False
 
     class Users:
@@ -100,8 +101,8 @@ class Sonarqube:
                     return rsp.text
                 else:
                     return None
-            except BaseException as be:
-                print(be.message)
+            except ConnectionError as ce:
+                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
             return None
 
         def create(self, email, login, name, password, scm_account=None, local="true"):
@@ -136,8 +137,8 @@ class Sonarqube:
                     return rsp.text
                 else:
                     return None
-            except BaseException as be:
-                print(be.message)
+            except ConnectionError as ce:
+                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
             return None
 
     class Components:
@@ -174,8 +175,8 @@ class Sonarqube:
                     return rsp.text
                 else:
                     return None
-            except BaseException as be:
-                print(be.message)
+            except ConnectionError as ce:
+                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
             return None
 
         def show(self, component, component_id):
@@ -203,8 +204,8 @@ class Sonarqube:
                     return rsp.text
                 else:
                     return None
-            except BaseException as be:
-                print(be.message)
+            except ConnectionError as ce:
+                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
             return None
 
         def tree(self, asc, component, component_id, page_num, page_size, query, qualifiers, sort, strategy):
@@ -252,8 +253,8 @@ class Sonarqube:
                     return rsp.text
                 else:
                     return None
-            except BaseException as be:
-                print(be.message)
+            except ConnectionError as ce:
+                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
             return None
 
     class Measures:
@@ -283,8 +284,8 @@ class Sonarqube:
                     return rsp.text
                 else:
                     return None
-            except BaseException as be:
-                print(be.message)
+            except ConnectionError as ce:
+                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
             return None
 
         def search_history(self, component, metrics, start_time, end_time, page_num, page_size):
@@ -317,6 +318,6 @@ class Sonarqube:
                     return rsp.text
                 else:
                     return None
-            except BaseException as be:
-                print(be.message)
+            except ConnectionError as ce:
+                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
             return None
