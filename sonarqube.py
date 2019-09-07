@@ -45,7 +45,8 @@ class Sonarqube:
             else:
                 return False
         except ConnectionError as ce:
-            logging.error("Login Sonarqube service catch exceptions: " + str(ce))
+            logging.error(time.strftime("%Y-%m-%d %H:%M:%S",
+                                        time.localtime()) + " " + "Login Sonarqube catch exceptions: " + str(ce))
         return False
 
     def logout(self):
@@ -68,7 +69,8 @@ class Sonarqube:
             else:
                 return False
         except ConnectionError as ce:
-            logging.error("Login Sonarqube service catch exceptions: " + str(ce))
+            logging.error(time.strftime("%Y-%m-%d %H:%M:%S",
+                                        time.localtime()) + " " + "catch exceptions: " + str(ce))
         return False
 
     class Users:
@@ -102,7 +104,8 @@ class Sonarqube:
                 else:
                     return None
             except ConnectionError as ce:
-                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
+                logging.error(time.strftime("%Y-%m-%d %H:%M:%S",
+                                            time.localtime()) + " " + "catch exceptions: " + str(ce))
             return None
 
         def create(self, email, login, name, password, scm_account=None, local="true"):
@@ -138,7 +141,8 @@ class Sonarqube:
                 else:
                     return None
             except ConnectionError as ce:
-                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
+                logging.error(time.strftime("%Y-%m-%d %H:%M:%S",
+                                            time.localtime()) + " " + "catch exceptions: " + str(ce))
             return None
 
     class Components:
@@ -176,7 +180,8 @@ class Sonarqube:
                 else:
                     return None
             except ConnectionError as ce:
-                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
+                logging.error(time.strftime("%Y-%m-%d %H:%M:%S",
+                                            time.localtime()) + " " + "catch exceptions: " + str(ce))
             return None
 
         def show(self, component, component_id):
@@ -205,7 +210,8 @@ class Sonarqube:
                 else:
                     return None
             except ConnectionError as ce:
-                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
+                logging.error(time.strftime("%Y-%m-%d %H:%M:%S",
+                                            time.localtime()) + " " + "catch exceptions: " + str(ce))
             return None
 
         def tree(self, asc, component, component_id, page_num, page_size, query, qualifiers, sort, strategy):
@@ -254,7 +260,8 @@ class Sonarqube:
                 else:
                     return None
             except ConnectionError as ce:
-                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
+                logging.error(time.strftime("%Y-%m-%d %H:%M:%S",
+                                            time.localtime()) + " " + "catch exceptions: " + str(ce))
             return None
 
     class Measures:
@@ -285,7 +292,8 @@ class Sonarqube:
                 else:
                     return None
             except ConnectionError as ce:
-                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
+                logging.error(time.strftime("%Y-%m-%d %H:%M:%S",
+                                            time.localtime()) + " " + "catch exceptions: " + str(ce))
             return None
 
         def search_history(self, component, metrics, start_time, end_time, page_num, page_size):
@@ -319,5 +327,6 @@ class Sonarqube:
                 else:
                     return None
             except ConnectionError as ce:
-                logging.error("Login Sonarqube service catch exceptions: " + str(ce))
+                logging.error(time.strftime("%Y-%m-%d %H:%M:%S",
+                                            time.localtime()) + " " + "search_history catch exceptions: " + str(ce))
             return None
