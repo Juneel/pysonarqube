@@ -44,22 +44,20 @@ class Component(User):
         except ConnectionError:
             return None
 
-    def detail(self, component_name, component_id):
+    def detail(self):
         """
         根据项目名称或者项目ID获取项目的详细信息
-        :param component_name: 项目名称  str
-        :param component_id: 项目ID  str
         :return: Http请求状态码为200，返回项目详细信息，否则返回None
         """
         path = "/api/components/show"
         path = path + "?"
-        if component_name is not None:
-            path = path + "component=" + component_name
-        if component_id is not None:
-            if component_name is not None:
-                path = path + "&componentId=" + component_id
+        if self.component_name is not None:
+            path = path + "component=" + self.component_name
+        if self.component_id is not None:
+            if self.component_name is not None:
+                path = path + "&componentId=" + self.component_id
             else:
-                path = path + "componentId=" + component_id
+                path = path + "componentId=" + self.component_id
         try:
             rsp = requests.get(url="http://{0}:{1}{2}".format(self.sonarqube_server_ip,
                                                               self.sonarqube_server_port,
@@ -71,11 +69,9 @@ class Component(User):
         except ConnectionError:
             return None
 
-    def tree(self, asc, component, component_id, page_num, page_size, query, qualifiers, sort, strategy):
+    def tree(self, asc, page_num, page_size, query, qualifiers, sort, strategy):
         """
         :param asc: true表示升序，false表示降序  str
-        :param component: 项目名称  str
-        :param component_id: 项目ID  str
         :param page_num: 页码  int
         :param page_size: 页大小 int
         :param query: 查询关键字 str
@@ -86,13 +82,13 @@ class Component(User):
         """
         path = "/api/components/tree"
         path = path + "?"
-        if component is not None:
-            path = path + "component=" + component
-        if component_id is not None:
-            if component is not None:
-                path = path + "&componentId=" + component_id
+        if self.component_name is not None:
+            path = path + "component=" + self.component_name
+        if self.component_id is not None:
+            if self.component_name is not None:
+                path = path + "&componentId=" + self.component_id
             else:
-                path = path + "componentId=" + component_id
+                path = path + "componentId=" + self.component_id
         if asc is not None:
             path = path + "&asc=" + asc
         if page_num is not None:

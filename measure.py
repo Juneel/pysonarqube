@@ -12,13 +12,12 @@ class Measure(Component):
         super().__init__(ip=ip, port=port, username=username, password=password)
         self.component_name = None
         self.component_id = None
+        # metrics: bugs, code_smells, coverage, duplicated_lines, vulnerabilities等等
         self.metrics = None
 
     def result(self):
         """
         获取工程相对应metrics的检查结果
-        :param metrics: bugs, code_smells, coverage, duplicated_lines, vulnerabilities等等
-        :param component_id: 工程ID
         :return: http状态码为200返回测量结果，否则返回None
         """
         path = "/api/measures/component"
@@ -41,8 +40,6 @@ class Measure(Component):
     def history_result(self, start_time, end_time, page_num, page_size):
         """
         查看对应工程的扫描metrics的历史记录
-        :param component_name: 工程名称
-        :param metrics: bugs, code_smells, coverage, duplicated_lines, vulnerabilities等等
         :param start_time: 开始时间 2017-10-19 or 2017-10-19T13:00:00+0200
         :param end_time: 结束时间 2017-10-19 or 2017-10-19T13:00:00+0200
         :param page_num: 页码

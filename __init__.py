@@ -3,7 +3,7 @@
 # @Time : 2019/9/29 16:33
 # @Author : Juneel
 # @File : __init__.py
-__all__ = ['component', 'measure', 'user', 'Sonarqube']
+__all__ = ['component', 'measure', 'user']
 
 
 class Sonarqube(object):
@@ -14,5 +14,3 @@ class Sonarqube(object):
         """
         self.sonarqube_server_ip = sonarqube_server_ip
         self.sonarqube_server_port = sonarqube_server_port
-        self.xsrf_token = None
-        self.jwt_session = None
