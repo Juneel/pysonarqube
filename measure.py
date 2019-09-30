@@ -28,7 +28,7 @@ class Measure(Component):
             path = path + "componentId=" + self.component_id
         if self.metrics is not None:
             path = path + "&metricKeys=" + self.metrics
-        self.logger.info("Request path is " + path)
+        self.logger.info("Request url is " + path)
         try:
             rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip, self.port, path))
             self.logger.info("Response content is " + str(rsp.text))
@@ -57,7 +57,7 @@ class Measure(Component):
                 path = path + "&from=" + str(start_time) + "&to=" + end_time
             if page_num and page_size:
                 path = path + "&p=" + str(page_num) + "&ps=" + str(page_size)
-        self.logger.info("Request path is " + path)
+        self.logger.info("Request url is " + path)
         try:
             rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip, self.port, path))
             self.logger.info("Response content is " + str(rsp.text))

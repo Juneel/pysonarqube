@@ -25,7 +25,7 @@ class User(Sonarqube):
         :return: "success"表示登录成功， "fail"表示登录失败
         """
         path = "/api/authentication/login"
-        self.logger.info("Request path is " + path)
+        self.logger.info("Request url is " + path)
         try:
             url = "http://{0}:{1}{2}?login={3}&password={4}".format(self.ip,
                                                                     str(self.port),
@@ -80,6 +80,7 @@ class User(Sonarqube):
                 path = path + "&previousPassword=" + str(old_password)
             if new_password is not None:
                 path = path + "&password=" + str(new_password)
+        self.logger.info("Request url is " + path)
         try:
             rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip, self.port, path))
             self.logger.info("Response content is " + str(rsp.text))

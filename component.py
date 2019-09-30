@@ -35,7 +35,7 @@ class Component(User):
             path = path + "&ps=" + str(ps)
         if q is not None:
             path = path + "&q=" + str(q)
-        self.logger.info("Request path is " + path)
+        self.logger.info("Request url is " + path)
         try:
             rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip,
                                                               self.port,
@@ -63,7 +63,7 @@ class Component(User):
                 path = path + "&componentId=" + self.component_id
             else:
                 path = path + "componentId=" + self.component_id
-        self.logger.info("Request path is " + path)
+        self.logger.info("Request url is " + path)
         try:
             rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip, self.port, path))
             self.logger.info("Response content is " + str(rsp.text))
@@ -108,7 +108,7 @@ class Component(User):
             path = path + "&s=" + sort
         if strategy is not None:
             path = path + "&strategy=" + strategy
-        self.logger.info("Request path is " + path)
+        self.logger.info("Request url is " + path)
         try:
             rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip, self.port, path))
             self.logger.info("Response content is " + str(rsp.text))
