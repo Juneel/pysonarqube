@@ -5,8 +5,10 @@
 # @File : user.py
 import requests
 from __init__ import Sonarqube
+from log import cls_log_handler
 
 
+@cls_log_handler
 class User(Sonarqube):
     def __init__(self, ip, port, username, password):
         super().__init__(ip=ip, port=port)
@@ -23,6 +25,7 @@ class User(Sonarqube):
         :return: "success"表示登录成功， "fail"表示登录失败
         """
         path = "/api/authentication/login"
+        self.logger.info("Request path is " + path)
         try:
             url = "http://{0}:{1}{2}?login={3}&password={4}".format(self.ip,
                                                                     str(self.port),
@@ -30,6 +33,7 @@ class User(Sonarqube):
                                                                     self.username,
                                                                     self.password)
             rsp = requests.post(url=url)
+            self.logger.info("Response content is " + str(rsp.text))
             if rsp.status_code == 200:
                 self.xsrf_token = rsp.cookies.get("XSRF-TOKEN")
                 self.jwt_session = rsp.cookies.get("JWT-SESSION")
@@ -47,12 +51,11 @@ class User(Sonarqube):
         """
         path = "/api/authentication/logout"
         try:
-            rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip,
-                                                               self.port,
-                                                               path),
+            rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip, self.port, path),
                                 headers={"Cookie": "XSRF-TOKEN={0};JWT-SESSION={1}".format(self.xsrf_token,
                                                                                            self.jwt_session),
                                          "X-XSRF-TOKEN": self.xsrf_token})
+            self.logger.info("Response content is " + str(rsp.text))
             if rsp.status_code == 200:
                 return "success"
             else:
@@ -78,9 +81,8 @@ class User(Sonarqube):
             if new_password is not None:
                 path = path + "&password=" + str(new_password)
         try:
-            rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip,
-                                                               self.port,
-                                                               path))
+            rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip, self.port, path))
+            self.logger.info("Response content is " + str(rsp.text))
             if rsp.status_code == 200:
                 return "success"
             else:
@@ -112,9 +114,8 @@ class User(Sonarqube):
                 path = path + "&scmAccount=" + scm_account
             path = path + "&local=" + local
         try:
-            rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip,
-                                                               self.port,
-                                                               path))
+            rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip, self.port, path))
+            self.logger.info("Response content is " + str(rsp.text))
             if rsp.status_code == 200:
                 return "success"
             else:

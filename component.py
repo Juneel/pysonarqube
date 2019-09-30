@@ -5,8 +5,10 @@
 # @File : component.py
 from user import User
 import requests
+from log import cls_log_handler
 
 
+@cls_log_handler
 class Component(User):
     def __init__(self, ip, port, username, password, component_name=None, component_id=None):
         super().__init__(ip=ip, port=port, username=username, password=password)
@@ -33,15 +35,18 @@ class Component(User):
             path = path + "&ps=" + str(ps)
         if q is not None:
             path = path + "&q=" + str(q)
+        self.logger.info("Request path is " + path)
         try:
             rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip,
                                                               self.port,
                                                               path))
+            self.logger.info("Response content is " + str(rsp.text))
             if rsp.status_code == 200:
                 return rsp.text
             else:
                 return None
-        except ConnectionError:
+        except ConnectionError as ce:
+            self.logger.error("Http request catch some error: " + str(ce))
             return None
 
     def detail(self):
@@ -58,10 +63,10 @@ class Component(User):
                 path = path + "&componentId=" + self.component_id
             else:
                 path = path + "componentId=" + self.component_id
+        self.logger.info("Request path is " + path)
         try:
-            rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip,
-                                                              self.port,
-                                                              path))
+            rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip, self.port, path))
+            self.logger.info("Response content is " + str(rsp.text))
             if rsp.status_code == 200:
                 return rsp.text
             else:
@@ -103,10 +108,10 @@ class Component(User):
             path = path + "&s=" + sort
         if strategy is not None:
             path = path + "&strategy=" + strategy
+        self.logger.info("Request path is " + path)
         try:
-            rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip,
-                                                              self.port,
-                                                              path))
+            rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip, self.port, path))
+            self.logger.info("Response content is " + str(rsp.text))
             if rsp.status_code == 200:
                 return rsp.text
             else:
