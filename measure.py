@@ -12,7 +12,7 @@ class Measure(Component):
         super().__init__(ip=ip, port=port, username=username, password=password)
         self.component_name = None
         self.component_id = None
-        # metrics: bugs, code_smells, coverage, duplicated_lines, vulnerabilities等等
+        # metrics指扫描类型: bugs, code_smells, coverage, duplicated_lines, vulnerabilities等等
         self.metrics = None
 
     def result(self):
