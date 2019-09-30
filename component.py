@@ -34,8 +34,8 @@ class Component(User):
         if q is not None:
             path = path + "&q=" + str(q)
         try:
-            rsp = requests.get(url="http://{0}:{1}{2}".format(self.sonarqube_server_ip,
-                                                              self.sonarqube_server_port,
+            rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip,
+                                                              self.port,
                                                               path))
             if rsp.status_code == 200:
                 return rsp.text
@@ -59,8 +59,8 @@ class Component(User):
             else:
                 path = path + "componentId=" + self.component_id
         try:
-            rsp = requests.get(url="http://{0}:{1}{2}".format(self.sonarqube_server_ip,
-                                                              self.sonarqube_server_port,
+            rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip,
+                                                              self.port,
                                                               path))
             if rsp.status_code == 200:
                 return rsp.text
@@ -104,8 +104,8 @@ class Component(User):
         if strategy is not None:
             path = path + "&strategy=" + strategy
         try:
-            rsp = requests.get(url="http://{0}:{1}{2}".format(self.sonarqube_server_ip,
-                                                              self.sonarqube_server_port,
+            rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip,
+                                                              self.port,
                                                               path))
             if rsp.status_code == 200:
                 return rsp.text

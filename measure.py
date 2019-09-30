@@ -27,8 +27,8 @@ class Measure(Component):
         if self.metrics is not None:
             path = path + "&metricKeys=" + self.metrics
         try:
-            rsp = requests.get(url="http://{0}:{1}{2}".format(self.sonarqube_server_ip,
-                                                              self.sonarqube_server_port,
+            rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip,
+                                                              self.port,
                                                               path))
             if rsp.status_code == 200:
                 return rsp.text
@@ -56,8 +56,8 @@ class Measure(Component):
             if page_num and page_size:
                 path = path + "&p=" + str(page_num) + "&ps=" + str(page_size)
         try:
-            rsp = requests.get(url="http://{0}:{1}{2}".format(self.sonarqube_server_ip,
-                                                              self.sonarqube_server_port,
+            rsp = requests.get(url="http://{0}:{1}{2}".format(self.ip,
+                                                              self.port,
                                                               path))
             if rsp.status_code == 200:
                 return rsp.text

@@ -9,7 +9,7 @@ from __init__ import Sonarqube
 
 class User(Sonarqube):
     def __init__(self, ip, port, username, password):
-        super().__init__(sonarqube_server_ip=ip, sonarqube_server_port=port)
+        super().__init__(ip=ip, port=port)
         self.username = username
         self.password = password
         self.xsrf_token = None
@@ -24,8 +24,8 @@ class User(Sonarqube):
         """
         path = "/api/authentication/login"
         try:
-            url = "http://{0}:{1}{2}?login={3}&password={4}".format(self.sonarqube_server_ip,
-                                                                    str(self.sonarqube_server_port),
+            url = "http://{0}:{1}{2}?login={3}&password={4}".format(self.ip,
+                                                                    str(self.port),
                                                                     path,
                                                                     self.username,
                                                                     self.password)
@@ -47,8 +47,8 @@ class User(Sonarqube):
         """
         path = "/api/authentication/logout"
         try:
-            rsp = requests.post(url="http://{0}:{1}{2}".format(self.sonarqube_server_ip,
-                                                               self.sonarqube_server_port,
+            rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip,
+                                                               self.port,
                                                                path),
                                 headers={"Cookie": "XSRF-TOKEN={0};JWT-SESSION={1}".format(self.xsrf_token,
                                                                                            self.jwt_session),
@@ -78,8 +78,8 @@ class User(Sonarqube):
             if new_password is not None:
                 path = path + "&password=" + str(new_password)
         try:
-            rsp = requests.post(url="http://{0}:{1}{2}".format(self.sonarqube_server_ip,
-                                                               self.sonarqube_server_port,
+            rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip,
+                                                               self.port,
                                                                path))
             if rsp.status_code == 200:
                 return "success"
@@ -112,8 +112,8 @@ class User(Sonarqube):
                 path = path + "&scmAccount=" + scm_account
             path = path + "&local=" + local
         try:
-            rsp = requests.post(url="http://{0}:{1}{2}".format(self.sonarqube_server_ip,
-                                                               self.sonarqube_server_port,
+            rsp = requests.post(url="http://{0}:{1}{2}".format(self.ip,
+                                                               self.port,
                                                                path))
             if rsp.status_code == 200:
                 return "success"
