@@ -8,4 +8,4 @@ measure: 工程的扫描结果的类，封装了获取结果的方法
 
 log：打印日志的装饰器
 
-MRO：Measure>Component>User>Sonarqube>object
+MRO：Measure继承Component，Component继承User，User继承Sonarqube, Sonarqube继承object

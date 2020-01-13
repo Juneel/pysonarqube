@@ -4,7 +4,7 @@
 # @Author : Juneel
 # @File : user.py
 import requests
-from __init__ import Sonarqube
+from . import Sonarqube
 from log import cls_log_handler
 
 
